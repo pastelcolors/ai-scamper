@@ -246,9 +246,6 @@ function Data() {
 				graph: undefined, // Since graph is supposed to be undefined for now
 			};
 
-			// If you're using Zod for validating the schema, the line below should not be commented
-			// const validatedPayload = schema.parse(payload);
-
 			fetch(apiUrl, {
 				method: "POST",
 				headers: {
@@ -293,7 +290,10 @@ function Data() {
 	);
 }
 
-const convertReactFlowToMermaid = <T extends { label: string; content: string }, U>(
+export const convertReactFlowToMermaid = <
+	T extends { label: string; content: string },
+	U,
+>(
 	flow: ReactFlowJsonObject<T, U>,
 ): string => {
 	let mermaidStr = "graph TD\n";
@@ -305,8 +305,8 @@ const convertReactFlowToMermaid = <T extends { label: string; content: string },
 
 	for (const node of flow.nodes.filter((node) => node.type !== "MasterNode")) {
 		const label = node.data.label;
-		const nodeType = node.type
-		const content = node.data.content
+		const nodeType = node.type;
+		const content = node.data.content;
 		mermaidStr += `    ${node.id}[${label}-${content}]:::${nodeType}\n`;
 	}
 
@@ -318,7 +318,6 @@ const convertReactFlowToMermaid = <T extends { label: string; content: string },
 
 	return mermaidStr;
 };
-
 
 export default function Scamper() {
 	const reactFlow = useReactFlow();

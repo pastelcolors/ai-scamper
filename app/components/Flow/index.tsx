@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import ReactFlow, {
 	ConnectionLineType,
 	type NodeOrigin,
@@ -16,16 +16,19 @@ import ReactFlow, {
 import { shallow } from "zustand/shallow";
 
 import useStore, { type RFState } from "../../lib/store";
+import { Button } from "../ui/button";
 import EdgeComponent from "./Edge";
 import UserNode from "./UserNode";
 
-// we need to import the React Flow styles to make it work
 import "reactflow/dist/style.css";
 import Scamper from "../Scamper";
 import AIGeneratedNode from "./AIGeneratedNode";
 import MasterNode from "./MasterNode";
 import Loader from "../Loader";
+import ELK from "elkjs/lib/elk.bundled.js";
+import { BsWindowSidebar } from "react-icons/bs";
 
+const elk = new ELK();
 const selector = (state: RFState) => ({
 	nodes: state.nodes,
 	edges: state.edges,
@@ -33,6 +36,8 @@ const selector = (state: RFState) => ({
 	onEdgesChange: state.onEdgesChange,
 	addChildNode: state.addChildNode,
 	isLoading: state.isLoading,
+	setNodes: state.setNodes,
+	setEdges: state.setEdges,
 });
 
 const nodeTypes = {
@@ -52,11 +57,24 @@ const defaultEdgeOptions = { style: connectionLineStyle, type: "mindmap" };
 
 function Flow() {
 	const store = useStoreApi();
-	const { nodes, edges, onNodesChange, onEdgesChange, addChildNode, isLoading } = useStore(
-		selector,
-		shallow,
-	);
-	const { screenToFlowPosition } = useReactFlow();
+	const {
+		nodes,
+		edges,
+		onNodesChange,
+		onEdgesChange,
+		addChildNode,
+		isLoading,
+		setNodes,
+		setEdges,
+	} = useStore(selector, shallow);
+	const {
+		screenToFlowPosition,
+		toObject,
+		setViewport,
+		fitView,
+		getNodes,
+		getEdges,
+	} = useReactFlow();
 	const connectingNodeId = useRef<string | null>(null);
 
 	const getChildNodePosition = (
@@ -117,8 +135,36 @@ function Flow() {
 		[addChildNode, getChildNodePosition, store],
 	);
 
-	return (
+	const useLayoutedElements = () => {
+		const { getNodes, getEdges, fitView } = useReactFlow();
 
+		const getLayoutedElements = useCallback((options) => {
+			const layoutOptions = { ...options };
+			const graph = {
+				id: "root",
+				layoutOptions: layoutOptions,
+				children: getNodes(),
+				edges: getEdges(),
+			};
+
+			elk.layout(graph).then(({ children }) => {
+				children.forEach((node) => {
+					node.position = { x: node.x, y: node.y };
+				});
+
+				setNodes(children as Node[]);
+				window.requestAnimationFrame(() => {
+					fitView();
+				});
+			});
+		}, []);
+
+		return { getLayoutedElements };
+	};
+
+	const { getLayoutedElements } = useLayoutedElements();
+
+	return (
 		<ReactFlow
 			nodes={nodes}
 			edges={edges}
@@ -141,11 +187,51 @@ function Flow() {
 			<div className="absolute bottom-0 left-0">
 				<Controls showInteractive={false} />
 				<Scamper />
+				<div className="absolute bottom-28 left-6 z-10">
+					<Button
+						onClick={() => {
+							const flow = toObject();
+							localStorage.setItem("flow", JSON.stringify(flow));
+						}}
+					>
+						Save
+					</Button>
+					<Button
+						onClick={() => {
+							const flow = JSON.parse(localStorage.getItem("flow"));
+
+							if (flow) {
+								const { x = 0, y = 0, zoom = 1 } = flow.viewport;
+								setNodes(flow.nodes || []);
+								setEdges(flow.edges || []);
+								setViewport({ x, y, zoom });
+							}
+						}}
+					>
+						Restore
+					</Button>
+					<Button
+						onClick={() => {
+							getLayoutedElements({
+								"elk.algorithm": "layered",
+								"elk.direction": "RIGHT",
+								"elk.spacing.nodeNode": 20,
+								"elk.layered.spacing.nodeNodeBetweenLayers": 40,
+								"elk.layered.mergeEdges": "true",
+								"elk.layered.nodePlacement.strategy": "NETWORK_SIMPLEX",
+								"elk.edgeRouting": "ORTHOGONAL",
+							});
+						}}
+					>
+						Format
+					</Button>
+				</div>
 			</div>
 			<Background variant={BackgroundVariant.Dots} />
 			<MiniMap />
 		</ReactFlow>
 	);
 }
+
 
 export default Flow;

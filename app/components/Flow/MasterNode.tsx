@@ -34,7 +34,12 @@ import {
 import { Label } from "~/components/ui/label";
 
 import { HiOutlineCog, HiOutlineUpload } from "react-icons/hi";
-import { HiCheck, HiChevronDown, HiOutlineBolt } from "react-icons/hi2";
+import {
+	HiCheck,
+	HiChevronDown,
+	HiOutlineBolt,
+	HiXCircle,
+} from "react-icons/hi2";
 import useStore from "../../lib/store";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
@@ -69,22 +74,32 @@ const PEER_PROFILES: PeerProfile[] = [
 export default function MasterNode(props: NodeProps<MasterNodeData>) {
 	const updateNodeData = useStore((state) => state.updateNodeData);
 	const startBrainstorming = useStore((state) => state.startBrainstorming);
-	const fetcher = useFetcher();
+	const updateAgents = useStore((state) => state.updateAgents);
+	const updateAgent = useStore((state) => state.updateAgent);
+	const addAgent = useStore((state) => state.addAgent);
 
-	const [peerProfiles, setPeerProfiles] = useState(PEER_PROFILES);
+	const agents = useStore((state) => state.agents);
+	const fetcher = useFetcher();
 	const [formName, setFormName] = useState("");
 	const [formDescription, setFormDescription] = useState("");
 
 	const [tempName, setTempName] = useState("");
 	const [tempDescription, setTempDescription] = useState("");
 
-	const TEST_MODE = true;
+	const DEFAULT_VALUES = {
+		problem: "Coming up with novel and creative ideas can be challenging, especially when brainstorming alone or feeling stuck. Traditional brainstorming methods are often inefficient and fail to fully leverage the knowledge and associations that could lead to breakthrough ideas.",
+		goal: "To create an AI-powered brainstorming tool that augments human creativity by intelligently suggesting related concepts, questions, and ideas. The tool should help users break out of creative ruts, make new connections between ideas, and engage in more productive ideation sessions, both individually and collaboratively.",
+		context: "The AI brainstorming tool will utilize advanced language models like GPT-4 to understand the context and semantics of the user's input ideas and generate relevant suggestions. It will provide an intuitive visual interface, such as a mind map, for users to input their initial ideas and easily explore the AI-generated suggestions. The tool will allow users to set clear parameters and refine the AI's outputs through feedback to improve the relevance and quality of the brainstormed ideas.	It will support various brainstorming techniques and prompt structures to cater to different creative challenges and user preferences. The AI brainstorming tool will integrate with popular productivity and collaboration platforms to fit seamlessly into users' existing workflows.",
+	};
 
-	// useLayoutEffect(() => {
-	//     if (inputRef.current) {
-	//         inputRef.current.style.width = `${data.label.length * 8}px`;
-	//     }
-	// }, [data.label.length]);
+	useEffect(() => {
+		updateNodeData(props.id, {
+			...props.data,
+			context: DEFAULT_VALUES.context,
+			problem: DEFAULT_VALUES.problem,
+			goal: DEFAULT_VALUES.goal,
+		});
+	}, []);
 
 	return (
 		<>
@@ -103,7 +118,7 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 								<Textarea
 									id="problem"
 									placeholder="I want to expand my business in the Philippines"
-									value={TEST_MODE ? "Improving accessibility in public spaces" : ""}
+									value={props.data.problem}
 									onChange={(e) => {
 										updateNodeData(props.id, {
 											...props.data,
@@ -117,7 +132,7 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 								<Textarea
 									id="problem"
 									placeholder="Create a marketing plan. (What do you want to achieve at the end of this brainstorming session?)"
-									value={TEST_MODE ? "Design inclusive solutions that make public spaces more accessible and user-friendly for individuals with various disabilities or mobility challenges." : ""}
+									value={props.data.goal}
 									onChange={(e) => {
 										updateNodeData(props.id, {
 											...props.data,
@@ -130,7 +145,7 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 								<Label htmlFor="context">Other Context</Label>
 								<Textarea
 									id="context"
-									value={TEST_MODE ? "Many public spaces, such as parks, museums, and transportation hubs, can be challenging to navigate for people with disabilities or mobility issues. Innovative approaches are needed to enhance accessibility through thoughtful design, assistive technologies, and inclusive practices." : ""}
+									value={props.data.context}
 									placeholder="The business is about food"
 									onChange={(e) => {
 										updateNodeData(props.id, {
@@ -139,15 +154,6 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 										});
 									}}
 								/>
-							</div>
-							<div className="flex items-center space-x-2">
-								<Button className="w-fit">
-									<span className="mr-1">Upload</span>
-									<HiOutlineUpload />
-								</Button>
-								<span className="text-gray-500 text-sm">
-									Add Context Documents (PDF only)
-								</span>
 							</div>
 							<div className="flex flex-col space-y-1.5">
 								<div className="flex items-center space-x-1">
@@ -169,32 +175,24 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 									</DropdownMenuTrigger>
 									<DropdownMenuContent align="start" className="w-[200px]">
 										<DropdownMenuGroup>
-											{peerProfiles.map((profile, index) => (
+											{agents.map((profile, index) => (
 												<DropdownMenuSub key={index}>
 													<DropdownMenuSubTrigger
 														className="flex items-center gap-x-2"
 														onClick={() =>
-															setPeerProfiles((profiles) =>
-																profiles.map((p) => {
-																	if (p.name === profile.name) {
-																		return {
-																			...p,
-																			name: profile.name,
-																			description: profile.description,
-																			selected: !profile.selected,
-																		};
-																	}
-																	return p;
-																}),
-															)
+															updateAgents({
+																role: profile.role,
+																description: profile.description,
+																selected: !profile.selected,
+															})
 														}
 														onMouseOver={() => {
-															setTempName(profile.name);
+															setTempName(profile.role);
 															setTempDescription(profile.description);
 														}}
 													>
 														{profile.selected && <HiCheck />}
-														{profile.name}
+														{profile.role}
 													</DropdownMenuSubTrigger>
 													<DropdownMenuSubContent
 														className="p-4 w-[350px]"
@@ -236,18 +234,10 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 															<div className="flex items-center pt-3 gap-x-2">
 																<Button
 																	onClick={() => {
-																		setPeerProfiles((profiles) => {
-																			return profiles.map((p) => {
-																				if (p.name === profile.name) {
-																					return {
-																						...p,
-																						name: tempName,
-																						description: tempDescription,
-																						selected: true,
-																					};
-																				}
-																				return p;
-																			});
+																		updateAgent({
+																			role: tempName,
+																			description: tempDescription,
+																			selected: true,
 																		});
 																	}}
 																>
@@ -256,11 +246,11 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 																<Button
 																	variant="destructive"
 																	onClick={() => {
-																		setPeerProfiles(() =>
-																			peerProfiles.filter(
-																				(item) => item.name !== profile.name,
-																			),
-																		);
+																		updateAgents({
+																			role: profile.role,
+																			description: profile.description,
+																			selected: false,
+																		});
 																		setTempName("");
 																		setTempDescription("");
 																	}}
@@ -314,14 +304,11 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 													<div className="flex items-center pt-3 gap-x-2">
 														<Button
 															onClick={() => {
-																setPeerProfiles((profiles) => [
-																	...profiles,
-																	{
-																		name: formName,
-																		description: formDescription,
-																		selected: true,
-																	},
-																]);
+																addAgent({
+																	role: formName,
+																	description: formDescription,
+																	selected: true,
+																});
 																setFormName("");
 																setFormDescription("");
 															}}
@@ -349,16 +336,19 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 				</CardContent>
 
 				<CardFooter className="w-full">
-					<Button onClick={() => {
-						startBrainstorming(props)
-					}} className="w-full">
+					<Button
+						onClick={() => {
+							startBrainstorming(props);
+						}}
+						className="w-full"
+					>
 						<HiOutlineBolt /> <span>Start Brainstorming</span>
 					</Button>
 				</CardFooter>
 				<Handle type="target" position={Position.Top} />
 				<Handle type="source" position={Position.Top} />
 			</Card>
-
 		</>
 	);
 }
+

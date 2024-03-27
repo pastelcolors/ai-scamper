@@ -1,5 +1,11 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { BsRobot } from "react-icons/bs";
+import {
+	HiDocument,
+	HiLightBulb,
+	HiOutlineChatBubbleBottomCenterText,
+	HiOutlineLightBulb,
+} from "react-icons/hi2";
 import { Handle, type NodeProps, Position } from "reactflow";
 import {
 	Popover,
@@ -7,12 +13,13 @@ import {
 	PopoverTrigger,
 } from "~/components/ui/popover";
 
+
 export type AIGeneratedNodeData = {
 	label:
-	| "AI Section Suggestion"
-	| "AI Question"
-	| "AI Stimulating Question"
-	| "Domain Expert Opinion";
+		| "AI Section Suggestion"
+		| "AI Question"
+		| "AI Stimulating Question"
+		| "Domain Expert Opinion";
 	content: string;
 	helperText?: string;
 };
@@ -40,13 +47,13 @@ export default function AIGeneratedNode({
 			return (
 				<Popover>
 					<PopoverTrigger asChild className="text-left">
-						<div className="relative w-[200px] bg-white p-4 rounded-3xl shadow-md border-2 border-black dragHandle">
+						<div className="relative w-[250px] bg-white p-4 rounded-3xl shadow-md border-2 border-black dragHandle">
 							<Handle type="target" position={Position.Left} />
 							<div className="flex items-center gap-x-2 text-xs">
 								<BsRobot />
 								<span className="italic">{data.label}</span>
 							</div>
-							<span>{data.content}</span>
+							<span>{data.helperText}</span>
 							<Handle type="source" position={Position.Right} />
 						</div>
 					</PopoverTrigger>
@@ -59,13 +66,13 @@ export default function AIGeneratedNode({
 							<BsRobot />
 							<span className="text-xs italic">What's this?</span>
 						</div>
-						<span>{data.helperText}</span>
+						<span>{data.content}</span>
 					</PopoverContent>
 				</Popover>
 			);
 		case "AI Question":
 			return (
-				<div className="relative w-[200px] bg-white p-4 shadow-md border-2 border-dotted border-black dragHandle">
+				<div className="relative w-[250px] bg-white p-4 shadow-md border-2 border-dotted border-black dragHandle">
 					<Handle type="target" position={Position.Left} />
 					<div className="flex items-center gap-x-2 text-xs">
 						<BsRobot />
@@ -74,21 +81,32 @@ export default function AIGeneratedNode({
 					<span>{data.content}</span>
 					<Handle type="source" position={Position.Right} />
 				</div>
-
+			);
+		case "Domain Expert Opinion":
+			return (
+				<div className="relative w-[400px] bg-black p-4 shadow-md border-2 border-dotted border-white text-white dragHandle">
+					<Handle type="target" position={Position.Left} />
+					<div className="flex items-center justify-between gap-x-2">
+						<BsRobot />
+						<span className="italic text-xs">{data.label}</span>
+						<HiOutlineChatBubbleBottomCenterText />
+					</div>
+					<span>{data.content}</span>
+					<Handle type="source" position={Position.Right} />
+				</div>
+			);
+		case "AI Stimulating Question":
+			return (
+				<div className="relative w-[400px] bg-[#FFE2C0] p-4 shadow-md border-2 border-dotted border-black dragHandle">
+					<Handle type="target" position={Position.Left} />
+					<div className="flex items-center justify-between gap-x-2">
+						<BsRobot />
+						<span className="italic text-xs">{data.label}</span>
+						<HiOutlineLightBulb />
+					</div>
+					<span>{data.content}</span>
+					<Handle type="source" position={Position.Right} />
+				</div>
 			);
 	}
-	return (
-		<div className="relative bg-white p-2 rounded-lg shadow-md border-2 border-black">
-			<Handle type="target" position={Position.Top} />
-			<input
-				ref={inputRef}
-				className="text-center"
-				value={data.label}
-				onChange={(e) => {
-					// updateNodeLabel(id, e.target.value);
-				}}
-			/>
-			<Handle type="source" position={Position.Bottom} />
-		</div>
-	);
 }
