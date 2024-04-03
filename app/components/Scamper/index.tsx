@@ -330,11 +330,6 @@ export default function Scamper() {
 
 	return (
 		<Sheet>
-			<SheetTrigger className="z-10" asChild>
-				<Button className="z-10 absolute bottom-3 left-20">
-					⚙️ Configuration
-				</Button>
-			</SheetTrigger>
 			<SheetContent>
 				<SheetHeader>
 					<SheetTitle>⚙️ Configuration</SheetTitle>

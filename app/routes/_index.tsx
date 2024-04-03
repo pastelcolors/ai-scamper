@@ -6,7 +6,7 @@ import { ReactFlowProvider } from "reactflow";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "AI Brainstorming Tool" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };

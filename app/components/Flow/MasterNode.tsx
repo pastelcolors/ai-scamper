@@ -69,6 +69,16 @@ const PEER_PROFILES: PeerProfile[] = [
 		description: "The marketing manager of a large company",
 		selected: false,
 	},
+	{
+		name: "Customer who haven't used AI tools",
+		description: "A customer who is new to AI tools",
+		selected: false,
+	},
+	{
+		name: "AI tool product manager",
+		description: "A product manager of an AI tool",
+		selected: false,
+	}
 ];
 
 export default function MasterNode(props: NodeProps<MasterNodeData>) {
