@@ -29,7 +29,7 @@ export default function UserNode(props: NodeProps<UserNodeData>) {
 					value={props.data.label}
 					onChange={(e) => updateNodeData(props.id, { label: e.target.value })}
 					className="input absolute z-10 overflow-hidden text-ellipsis w-[180px] bottom-3 mt-2 inset-x-0 mx-auto"
-					placeholder="Your Idea"
+					placeholder="Your Thought"
 					rows={1}
 				/>
 				<PopoverTrigger>
@@ -37,7 +37,7 @@ export default function UserNode(props: NodeProps<UserNodeData>) {
 						<Handle type="target" position={Position.Left} />
 						<div className="flex items-center gap-x-2 text-xs pb-20">
 							<HiUser />
-							<span className="italic">Your Idea</span>
+							<span className="italic">Your Thought</span>
 						</div>
 
 						<Handle type="source" position={Position.Right} />
