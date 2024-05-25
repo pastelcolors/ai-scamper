@@ -193,187 +193,209 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 									</span>
 								</div>
 								<ScrollArea className="w-full">
-									<div className="space-y-4">
-										{agents.map((profile) => (
-											<div
-												key={profile.role}
-												className="flex items-top space-x-2"
-											>
-												<Checkbox
-													id={`profile-${profile.role}`}
-													checked={profile.selected}
-													onCheckedChange={() =>
-														updateAgents(
-															{
-																role: profile.role,
-																description: profile.description,
-																selected: profile.selected,
-															},
-															{
-																role: profile.role,
-																description: profile.description,
-																selected: !profile.selected,
-															},
-														)
-													}
-												/>
-												<div className="flex flex-row justify-between leading-none w-full">
-													<div className="flex flex-col gap-0.5">
-														<label
-															htmlFor={`profile-${profile.role}`}
-															className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-														>
-															{profile.role}
-														</label>
-														<p className="text-sm text-muted-foreground">
-															{profile.description}
-														</p>
-													</div>
-													<div className="flex flex-row gap-2">
-														<AlertDialog>
-															<AlertDialogTrigger asChild>
-																<Button
-																	variant="outline"
-																	size="sm"
-																	onClick={() => {
-																		setTempRole(profile.role);
-																		setTempDescription(profile.description);
-																		setTempSelected(profile.selected);
-																	}}
-																>
-																	Edit
-																</Button>
-															</AlertDialogTrigger>
-															<AlertDialogContent>
-																<AlertDialogHeader>
-																	<AlertDialogTitle>
-																		Edit Peer Profile
-																	</AlertDialogTitle>
-																	<AlertDialogDescription>
-																		<Label htmlFor="name">Name</Label>
-																		<div className="grid w-full max-w-sm items-center gap-1.5">
-																			<Input
-																				type="text"
-																				id="role"
-																				placeholder="Role"
-																				value={tempRole}
-																				onChange={(e) =>
-																					setTempRole(e.target.value)
-																				}
-																			/>
-																		</div>
-																		<div className="grid w-full max-w-sm items-center gap-1.5">
-																			<Label htmlFor="profile">
-																				Profile and Behavior
-																			</Label>
-																			<Input
-																				type="text"
-																				id="profile"
-																				placeholder="Explain what this peer does"
-																				value={tempDescription}
-																				onChange={(e) => {
-																					setTempDescription(e.target.value);
-																				}}
-																			/>
-																		</div>
-																	</AlertDialogDescription>
-																</AlertDialogHeader>
-																<AlertDialogFooter>
-																	<AlertDialogCancel>Cancel</AlertDialogCancel>
-																	<AlertDialogAction
-																		onClick={() => {
-																			const oldAgent = {
-																				role: profile.role,
-																				description: profile.description,
-																				selected: profile.selected,
-																			};
-																			updateAgents(oldAgent, {
-																				role: tempRole,
-																				description: tempDescription,
-																				selected: tempSelected,
-																			});
-																			setTempRole("");
-																			setTempDescription("");
-																			setTempSelected(false);
-																		}}
-																	>
-																		Save
-																	</AlertDialogAction>
-																</AlertDialogFooter>
-															</AlertDialogContent>
-														</AlertDialog>
-														<Button
-															variant="destructive"
-															size="sm"
-															onClick={() => {
-																deleteAgent({
+									<div>
+										<div className="space-y-4">
+											{agents.map((profile) => (
+												<div
+													key={profile.role}
+													className="flex items-top space-x-2"
+												>
+													<Checkbox
+														id={`profile-${profile.role}`}
+														checked={profile.selected}
+														onCheckedChange={() =>
+															updateAgents(
+																{
 																	role: profile.role,
 																	description: profile.description,
-																});
-																setTempRole("");
-																setTempDescription("");
-															}}
-														>
-															Delete
-														</Button>
+																	selected: profile.selected,
+																},
+																{
+																	role: profile.role,
+																	description: profile.description,
+																	selected: !profile.selected,
+																},
+															)
+														}
+													/>
+													<div className="flex flex-row justify-between leading-none w-full">
+														<div className="flex flex-col gap-0.5">
+															<label
+																htmlFor={`profile-${profile.role}`}
+																className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+															>
+																{profile.role}
+															</label>
+															<p className="text-sm text-muted-foreground">
+																{profile.description}
+															</p>
+														</div>
+														<div className="flex flex-row gap-2">
+															<AlertDialog>
+																<AlertDialogTrigger asChild>
+																	<Button
+																		variant="outline"
+																		size="sm"
+																		onClick={() => {
+																			setTempRole(profile.role);
+																			setTempDescription(profile.description);
+																			setTempSelected(profile.selected);
+																		}}
+																	>
+																		Edit
+																	</Button>
+																</AlertDialogTrigger>
+																<AlertDialogContent>
+																	<AlertDialogHeader>
+																		<AlertDialogTitle>
+																			Edit Peer Profile
+																		</AlertDialogTitle>
+																		<AlertDialogDescription>
+																			<Label htmlFor="name">Name</Label>
+																			<div className="grid w-full max-w-sm items-center gap-1.5">
+																				<Input
+																					type="text"
+																					id="role"
+																					placeholder="Role"
+																					value={tempRole}
+																					onChange={(e) =>
+																						setTempRole(e.target.value)
+																					}
+																				/>
+																			</div>
+																			<div className="grid w-full max-w-sm items-center gap-1.5 mt-4">
+																				<Label htmlFor="profile">
+																					Profile and Behavior
+																				</Label>
+																				<Input
+																					type="text"
+																					id="profile"
+																					placeholder="Explain what this peer does"
+																					value={tempDescription}
+																					onChange={(e) => {
+																						setTempDescription(e.target.value);
+																					}}
+																				/>
+																			</div>
+																		</AlertDialogDescription>
+																	</AlertDialogHeader>
+																	<AlertDialogFooter>
+																		<AlertDialogCancel>
+																			Cancel
+																		</AlertDialogCancel>
+																		<AlertDialogAction
+																			onClick={() => {
+																				const oldAgent = {
+																					role: profile.role,
+																					description: profile.description,
+																					selected: profile.selected,
+																				};
+																				updateAgents(oldAgent, {
+																					role: tempRole,
+																					description: tempDescription,
+																					selected: tempSelected,
+																				});
+																				setTempRole("");
+																				setTempDescription("");
+																				setTempSelected(false);
+																			}}
+																		>
+																			Save
+																		</AlertDialogAction>
+																	</AlertDialogFooter>
+																</AlertDialogContent>
+															</AlertDialog>
+															<Button
+																variant="destructive"
+																size="sm"
+																onClick={() => {
+																	deleteAgent({
+																		role: profile.role,
+																		description: profile.description,
+																	});
+																	setTempRole("");
+																	setTempDescription("");
+																}}
+															>
+																Delete
+															</Button>
+														</div>
 													</div>
 												</div>
-											</div>
-										))}
+											))}
+										</div>
 
-										<div className="p-4 w-[350px]">
-											<Label className="text-gray-500 font-normal text-sm">
-												Add New Peer Profile
-											</Label>
-											<form
-												onSubmit={(e) => e.preventDefault()}
-												className="px-2 py-2 flex flex-col space-y-2"
-											>
-												<div className="grid w-full max-w-sm items-center gap-1.5">
-													<Label htmlFor="name">Name</Label>
-													<Input
-														type="text"
-														id="name"
-														placeholder="Name"
-														value={formName}
-														onChange={(e) => setFormName(e.target.value)}
-													/>
-												</div>
-												<div className="grid w-full max-w-sm items-center gap-1.5">
-													<Label htmlFor="profile">Profile and Behavior</Label>
-													<Input
-														type="text"
-														id="profile"
-														placeholder="Explain what this peer does"
-														value={formDescription}
-														onChange={(e) => setFormDescription(e.target.value)}
-													/>
-												</div>
-												<div className="flex items-center pt-3 gap-x-2">
-													<Button
-														onClick={() => {
-															addAgent({
-																role: formName,
-																description: formDescription,
-																selected: true,
-															});
-															setFormName("");
-															setFormDescription("");
-														}}
-													>
-														Save and Add
+										<div className="mt-2">
+											<AlertDialog>
+												<AlertDialogTrigger asChild>
+													<Button variant="secondary" className="h-fit">
+														Add New Peer
 													</Button>
-													<Button
-														variant="destructive"
-														onClick={() => {
-															setFormName("");
-															setFormDescription("");
-														}}
-													>
-														Cancel
-													</Button>
-												</div>
-											</form>
+												</AlertDialogTrigger>
+												<AlertDialogContent>
+													<AlertDialogHeader>
+														<AlertDialogTitle>
+															Add Peer Profile
+														</AlertDialogTitle>
+														<AlertDialogDescription>
+															<form
+																onSubmit={(e) => e.preventDefault()}
+																className="px-2 py-2 flex flex-col space-y-4"
+															>
+																<div className="grid w-full max-w-sm items-center gap-1.5">
+																	<Label htmlFor="name">Name</Label>
+																	<Input
+																		type="text"
+																		id="name"
+																		placeholder="Name"
+																		value={formName}
+																		onChange={(e) =>
+																			setFormName(e.target.value)
+																		}
+																	/>
+																</div>
+																<div className="grid w-full max-w-sm items-center gap-1.5">
+																	<Label htmlFor="profile">
+																		Profile and Behavior
+																	</Label>
+																	<Input
+																		type="text"
+																		id="profile"
+																		placeholder="Explain what this peer does"
+																		value={formDescription}
+																		onChange={(e) =>
+																			setFormDescription(e.target.value)
+																		}
+																	/>
+																</div>
+															</form>
+														</AlertDialogDescription>
+													</AlertDialogHeader>
+													<AlertDialogFooter>
+														<AlertDialogCancel
+															onClick={() => {
+																setFormName("");
+																setFormDescription("");
+															}}
+														>
+															Cancel
+														</AlertDialogCancel>
+														<AlertDialogAction
+															onClick={() => {
+																addAgent({
+																	role: formName,
+																	description: formDescription,
+																	selected: true,
+																});
+																setFormName("");
+																setFormDescription("");
+															}}
+														>
+															Continue
+														</AlertDialogAction>
+													</AlertDialogFooter>
+												</AlertDialogContent>
+											</AlertDialog>
 										</div>
 									</div>
 								</ScrollArea>
@@ -389,7 +411,7 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 						}}
 						className="w-full"
 					>
-						<HiOutlineBolt /> <span>Start Brainstorming</span>
+						<HiOutlineBolt /> <span className="ml-4">Start Brainstorming</span>
 					</Button>
 				</CardFooter>
 				<Handle type="target" position={Position.Top} />
