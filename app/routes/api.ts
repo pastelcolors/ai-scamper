@@ -10,7 +10,7 @@ import {
 
 const anthropicClient = new Anthropic({
 	apiKey: process.env.ANTHROPIC_API_KEY,
-	model: "claude-3-opus",
+	model: "claude-3-haiku",
 	temperature: 0,
 	maxTokens: 2048,
 });
