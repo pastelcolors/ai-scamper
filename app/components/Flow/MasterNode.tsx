@@ -105,8 +105,9 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 	const [formName, setFormName] = useState("");
 	const [formDescription, setFormDescription] = useState("");
 
-	const [tempName, setTempName] = useState("");
+	const [tempRole, setTempRole] = useState("");
 	const [tempDescription, setTempDescription] = useState("");
+	const [tempSelected, setTempSelected] = useState(false);
 
 	const DEFAULT_VALUES = {
 		problem:
@@ -194,16 +195,26 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 								<ScrollArea className="w-full">
 									<div className="space-y-4">
 										{agents.map((profile) => (
-											<div key={profile.role} className="flex items-top space-x-2">
+											<div
+												key={profile.role}
+												className="flex items-top space-x-2"
+											>
 												<Checkbox
 													id={`profile-${profile.role}`}
 													checked={profile.selected}
 													onCheckedChange={() =>
-														updateAgents({
-															role: profile.role,
-															description: profile.description,
-															selected: !profile.selected,
-														})
+														updateAgents(
+															{
+																role: profile.role,
+																description: profile.description,
+																selected: profile.selected,
+															},
+															{
+																role: profile.role,
+																description: profile.description,
+																selected: !profile.selected,
+															},
+														)
 													}
 												/>
 												<div className="flex flex-row justify-between leading-none w-full">
@@ -225,8 +236,9 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 																	variant="outline"
 																	size="sm"
 																	onClick={() => {
-																		setTempName(profile.role);
+																		setTempRole(profile.role);
 																		setTempDescription(profile.description);
+																		setTempSelected(profile.selected);
 																	}}
 																>
 																	Edit
@@ -242,11 +254,11 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 																		<div className="grid w-full max-w-sm items-center gap-1.5">
 																			<Input
 																				type="text"
-																				id="name"
-																				placeholder="Name"
-																				value={tempName}
+																				id="role"
+																				placeholder="Role"
+																				value={tempRole}
 																				onChange={(e) =>
-																					setTempName(e.target.value)
+																					setTempRole(e.target.value)
 																				}
 																			/>
 																		</div>
@@ -270,13 +282,19 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 																	<AlertDialogCancel>Cancel</AlertDialogCancel>
 																	<AlertDialogAction
 																		onClick={() => {
-																			updateAgents({
-																				role: tempName,
+																			const oldAgent = {
+																				role: profile.role,
+																				description: profile.description,
+																				selected: profile.selected,
+																			};
+																			updateAgents(oldAgent, {
+																				role: tempRole,
 																				description: tempDescription,
-																				selected: true,
+																				selected: tempSelected,
 																			});
-																			setTempName("");
+																			setTempRole("");
 																			setTempDescription("");
+																			setTempSelected(false);
 																		}}
 																	>
 																		Save
@@ -292,7 +310,7 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 																	role: profile.role,
 																	description: profile.description,
 																});
-																setTempName("");
+																setTempRole("");
 																setTempDescription("");
 															}}
 														>
