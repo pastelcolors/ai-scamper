@@ -31,7 +31,6 @@
     "isbot": "^4.1.0",
     "llamaindex": "^0.0.0-20240314032004",
     "lucide-react": "^0.354.0",
-    "openai": "^4.28.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.0",
