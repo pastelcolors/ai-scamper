@@ -4,6 +4,9 @@
   "name": "Bun",
   "dockerFile": "Dockerfile",
   // Configure tool-specific properties.
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
   "customizations": {
     // Configure properties specific to VS Code.
     "vscode": {
