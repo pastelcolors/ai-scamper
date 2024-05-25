@@ -34,13 +34,13 @@ export default function UserNode(props: NodeProps<UserNodeData>) {
 				/>
 				<PopoverTrigger>
 					<div className="relative w-[250px] bg-white p-4 rounded-md shadow-md border-2 border-black dragHandle">
-						<Handle type="target" position={Position.Left} />
+						<Handle type="target" position={Position.Left} style={{height: "12px",  width: "12px"}} className="w-16" />
 						<div className="flex items-center gap-x-2 text-xs pb-20">
 							<HiUser />
 							<span className="italic">Your Thought</span>
 						</div>
 
-						<Handle type="source" position={Position.Right} />
+						<Handle type="source" position={Position.Right} style={{height: "12px",  width: "12px"}} className="w-16" />
 					</div>
 				</PopoverTrigger>
 			</div>

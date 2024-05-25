@@ -355,8 +355,8 @@ export default function MasterNode(props: NodeProps<MasterNodeData>) {
 						<HiOutlineBolt /> <span>Start Brainstorming</span>
 					</Button>
 				</CardFooter>
-				<Handle type="target" position={Position.Top} />
-				<Handle type="source" position={Position.Top} />
+				<Handle type="target" position={Position.Top} style={{height: "12px",  width: "12px"}} className="w-16"/>
+				<Handle type="source" position={Position.Top} style={{height: "12px",  width: "12px"}} className="w-16"/>
 			</Card>
 		</>
 	);
