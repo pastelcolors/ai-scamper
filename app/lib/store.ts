@@ -37,8 +37,8 @@ export type RFState = {
 	) => void;
 	isLoading: boolean;
 	agents: Agent[];
-	updateAgents: (role: Agent) => void;
-	updateAgent: (role: Agent) => void;
+	updateAgents: (oldAgent: Agent, updatedAgent: Agent) => void;
+	deleteAgent: (role: Role) => void;
 	addAgent: (role: Agent) => void;
 	setNodes: (nodes: Node<NodeData>[]) => void;
 	setEdges: (edges: Edge[]) => void;
@@ -203,24 +203,22 @@ const useStore = createWithEqualityFn<RFState>((set, get) => ({
 			selected: false,
 		},
 	],
-	updateAgents: (role: Agent) => {
-		set({
-			agents: get().agents.map((agent) => {
-				if (agent.role === role.role) {
-					return role;
-				}
-				return agent;
-			}),
-		});
+	updateAgents: (oldAgent: Agent, updatedAgent: Agent) => {
+		set((prevState) => ({
+			agents: prevState.agents.map((agent) =>
+				agent.role === oldAgent.role ? { ...agent, ...updatedAgent } : agent,
+			),
+		}));
 	},
-	updateAgent: (role: Agent) => {
+	deleteAgent: (agent: Role) => {
+		const oldAgents = get().agents;
+		const newAgents = oldAgents.filter(
+			(oldAgent) => oldAgent.role !== agent.role,
+		);
+		// console.log(oldAgents);
+		// console.log(newAgents);
 		set({
-			agents: get().agents.map((agent) => {
-				if (agent.role === role.role) {
-					return role;
-				}
-				return agent;
-			}),
+			agents: newAgents,
 		});
 	},
 	addAgent: (role: Agent) => {
