@@ -79,6 +79,7 @@ function systemPromptBuilder() {
 	- Maintain a professional and respectful tone throughout, focusing on the ideas rather than the user
 	- Generate two opinion nodes for each role, using the role name as the XML tag
 	- Write the opinions in second-person voice, addressing the user directly while identifying the role being personified
+	- Each opinion should be a maximum of two sentence long
 	</guidelines>
 	Remember, your goal is to provide the user with valuable insights and feedback that will help them refine and expand their ideas within the SCAMPER framework. Let the roles' unique perspectives guide your generation of constructive and thought-provoking Domain Expert Opinions.
 	</instruction>`;

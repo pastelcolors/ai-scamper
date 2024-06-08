@@ -69,6 +69,7 @@ function systemPromptBuilder() {
 	- Avoid explicitly mentioning or directly asking SCAMPER questions
 	- Focus on guiding the user to consider new angles or possibilities related to their idea
 	- Ensure the questions are relevant to the user's answer and the corresponding node in the graph
+	- Each question should be a maximum of one sentence long
 	</guidelines>
 	
 	Remember, your goal is to help the user expand their thinking and explore their ideas from different perspectives. The questions you generate should serve as catalysts for further reflection and development of the user's concept.

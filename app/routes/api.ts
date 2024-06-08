@@ -98,6 +98,7 @@ Strictly output your response in this XML format:
 - Provide expert opinions in the section content to give the user additional context and thought starters
 - Before outputting the final tree, let's think step-by-step on your approach in the 'thought' element
 - Don't use SCAMPER keywords in SECTION_TOPIC
+- Each question should be a maximum of one sentence long
 </guidelines>
 </instruction>`;
 
