@@ -5,7 +5,7 @@ This repository contains a graph-based brainstorming assistant tool that integra
 ## Features
 
 - Graph-based user interface for visualizing and connecting ideas
-- Integration with GPT-4 Turbo for AI-assisted facilitation
+- Integration with Claude for AI-assisted facilitation
 - Implementation of the SCAMPER framework for structured ideation
 - Chain-of-thought prompting for improved LLM responses
 
@@ -30,7 +30,7 @@ To install and run this project, follow these steps:
    ```
 
 3. Set up environment variables
-   Create a `.env` file in the root directory and add your OpenAI API key:
+   Create a `.env` file in the root directory and add your Anthropic API key:
    ```
    ANTHROPIC_API_KEY=your_api_key_here
    ```
