@@ -1,38 +1,45 @@
-# Welcome to Remix!
+# Graph-based Brainstorming Assistant
 
-- [Remix Docs](https://remix.run/docs)
+This repository contains a graph-based brainstorming assistant tool that integrates the SCAMPER ideation framework with a Large Language Model (LLM) to enhance solo brainstorming sessions. The tool aims to reduce instances of fixation and free riding while retaining the benefits of cognitive stimulation and AI facilitation.
 
-## Development
+## Features
 
-From your terminal:
+- Graph-based user interface for visualizing and connecting ideas
+- Integration with GPT-4 Turbo for AI-assisted facilitation
+- Implementation of the SCAMPER framework for structured ideation
+- Chain-of-thought prompting for improved LLM responses
 
-```sh
-npm run dev
-```
+## Prerequisites
 
-This starts your app in development mode, rebuilding assets on file changes.
+Before you begin, ensure you have met the following requirements:
+* You have installed [Node.js](https://nodejs.org/) (version 14.0.0 or later)
+* You have a Windows/Linux/Mac machine
 
-## Deployment
+## Installing and Running the Brainstorming Assistant
 
-First, build your app for production:
+To install and run this project, follow these steps:
 
-```sh
-npm run build
-```
+1. Clone the repository
+   ```
+   git clone https://github.com/pastelcolors/ai-scamper.git
+   ```
 
-Then run the app in production mode:
+2. Install dependencies
+   ```
+   npm install
+   ```
 
-```sh
-npm start
-```
+3. Set up environment variables
+   Create a `.env` file in the root directory and add your OpenAI API key:
+   ```
+   ANTHROPIC_API_KEY=your_api_key_here
+   ```
 
-Now you'll need to pick a host to deploy it to.
+4. Run the development server
+   ```
+   npm run dev
+   ```
 
-### DIY
+5. Open your browser and navigate to `http://localhost:3000`
 
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
 
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
