@@ -1,0 +1,105 @@
+<output>
+  <thought>
+    To generate a useful and relevant set of AI-powered brainstorming suggestions for the user's problem and goal, I will leverage the SCAMPER framework to craft thought-provoking questions that can help the user explore different angles and make new connections. I will aim to provide a diverse set of suggestions that cover various aspects of the problem space, while also grounding them in the specific context provided.
+
+The key steps I will take are:
+
+1. Analyze the user's problem, goal, and context to understand the core challenge they are trying to solve and the parameters they need to consider.
+2. Generate AI questions based on the SCAMPER themes (Substitute, Combine, Adapt, Modify, Put to other uses, Eliminate, Rearrange) that can help the user approach the problem from different perspectives.
+3. Craft the AI questions to be open-ended and encourage the user to explore new ideas, make connections, and challenge assumptions.
+4. Provide expert opinions and insights in the section content to give the user additional context and thought starters.
+5. Organize the suggestions into a visual mind map-like structure to make it easy for the user to navigate and explore the AI-generated ideas.
+</thought>
+  <tree>
+      <root>
+        <id>1</id>
+        <label>AI Section Suggestion</label>
+        <helper>Explore alternative components or resources that could be used to address the problem in a novel way.</helper>
+        <content>Substituting Key Elements</content>
+          <children>
+            <id>1.1</id>
+            <label>AI Question</label>
+            <helper></helper>
+            <content>What existing products, services, or technologies from other domains could you adapt or integrate to enhance your solution to the problem?</content>
+          </children>
+          <children>
+            <id>1.2</id>
+            <label>AI Question</label>
+            <helper></helper>
+            <content>How might you replace or substitute a key component of your current approach with something unexpected or unconventional to create a more impactful solution?</content>
+          </children>
+      </root>
+      <root>
+        <id>2</id>
+        <label>AI Section Suggestion</label>
+        <helper>Explore ways to combine existing ideas, features, or processes to create a more comprehensive solution.</helper>
+        <content>Combining Complementary Elements</content>
+        <children>
+            <id>2.1</id>
+            <label>AI Question</label>
+            <helper></helper>
+            <content>What existing ideas, features, or processes from related domains could you combine to enhance your solution and address the problem more effectively?</content>
+        </children>
+      </root>
+      <root>
+        <id>3</id>
+        <label>AI Section Suggestion</label>
+        <helper>Explore ways to adapt successful solutions from other contexts to address the specific aspects of the problem.</helper>
+        <content>Adapting Proven Approaches</content>
+        <children>
+            <id>3.1</id>
+            <label>AI Question</label>
+            <helper></helper>
+            <content>How could you modify or adapt a successful solution from another domain to address the unique constraints and requirements of your problem?</content>
+        </children>
+      </root>
+      <root>
+        <id>4</id>
+        <label>AI Section Suggestion</label>
+        <helper>Explore ways to modify or emphasize different aspects of the solution to better achieve the desired goal.</helper>
+        <content>Modifying Key Elements</content>
+        <children>
+            <id>4.1</id>
+            <label>AI Question</label>
+            <helper></helper>
+            <content>What specific features, processes, or approaches could you emphasize or de-emphasize in your solution to better align with your desired goal?</content>
+        </children>
+      </root>
+      <root>
+        <id>5</id>
+        <label>AI Section Suggestion</label>
+        <helper>Explore how different users might utilize the solution in novel or unexpected ways to address the problem.</helper>
+        <content>Repurposing for New Use Cases</content>
+        <children>
+            <id>5.1</id>
+            <label>AI Question</label>
+            <helper></helper>
+            <content>How might different types of users or stakeholders leverage your solution in unexpected ways to address the problem in their unique contexts?</content>
+        </children>
+      </root>
+      <root>
+        <id>6</id>
+        <label>AI Section Suggestion</label>
+        <helper>Explore ways to simplify the solution by eliminating unnecessary components or steps.</helper>
+        <content>Streamlining and Simplifying</content>
+        <children>
+            <id>6.1</id>
+            <label>AI Question</label>
+            <helper></helper>
+            <content>What aspects of your current solution could you eliminate or remove to simplify the approach while still achieving your desired goal?</content>
+        </children>
+      </root>
+      <root>
+        <id>7</id>
+        <label>AI Section Suggestion</label>
+        <helper>Explore ways to rearrange or reverse the order of steps in your solution to unlock new possibilities or efficiencies.</helper>
+        <content>Rearranging and Resequencing</content>
+        <children>
+            <id>7.1</id>
+            <label>AI Question</label>
+            <helper></helper>
+            <content>How might you rearrange or reverse the order of steps in your solution to unlock new possibilities or improve the efficiency of your approach?</content>
+        </children>
+      </root>
+  </tree>
+</output>

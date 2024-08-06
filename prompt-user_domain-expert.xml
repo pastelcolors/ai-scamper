@@ -1,0 +1,43 @@
+<roles><role>🏢 CEO</role><description>The CEO of a large company</description></roles><roles><role>📈 Marketing Manager</role><description>The marketing manager of a large company</description></roles><graph>graph TD
+    root[{problem: Coming up with novel and creative ideas can be challenging, especially when brainstorming alone or feeling stuck. Traditional brainstorming methods are often inefficient and fail to fully leverage the knowledge and associations that could lead to breakthrough ideas., goal: To create an AI-powered brainstorming tool that augments human creativity by intelligently suggesting related concepts, questions, and ideas. The tool should help users break out of creative ruts, make new connections between ideas, and engage in more productive ideation sessions, both individually and collaboratively., context: The AI brainstorming tool will utilize advanced language models like GPT-4 to understand the context and semantics of the user's input ideas and generate relevant suggestions. It will provide an intuitive visual interface, such as a mind map, for users to input their initial ideas and easily explore the AI-generated suggestions. The tool will allow users to set clear parameters and refine the AI's outputs through feedback to improve the relevance and quality of the brainstormed ideas.       It will support various brainstorming techniques and prompt structures to cater to different creative challenges and user preferences. The AI brainstorming tool will integrate with popular productivity and collaboration platforms to fit seamlessly into users' existing workflows.}]:::MasterNode
+    EhPbetqybMoYyiB6PYq85[AI Section Suggestion-Substituting Key Elements]:::AIGeneratedNode
+    2oCVoqfWP1_s-7rPraWyX[AI Question-What existing products, services, or technologies from other domains could you adapt or integrate to enhance your solution to the problem?]:::AIGeneratedNode
+    J-OWXm53dheLYiYPkYXHu[AI Question-How might you replace or substitute a key component of your current approach with something unexpected or unconventional to create a more impactful solution?]:::AIGeneratedNode
+    SiWG1r6e6LU4x-w64LeAq[AI Section Suggestion-Combining Complementary Elements]:::AIGeneratedNode
+    pBv1_8rD3zr3xspgStUct[AI Question-What existing ideas, features, or processes from related domains could you combine to enhance your solution and address the problem more effectively?]:::AIGeneratedNode
+    nbaIMYIZbJg41jgEkl_nu[AI Section Suggestion-Adapting Proven Approaches]:::AIGeneratedNode
+    y2KHXO6u0h3_Rd2oRym14[AI Question-How could you modify or adapt a successful solution from another domain to address the unique constraints and requirements of your problem?]:::AIGeneratedNode
+    bGVN1rZdBhtp0GFfWCQh6[AI Section Suggestion-Modifying Key Elements]:::AIGeneratedNode
+    th9L808pBd6aQH_eFwjXe[AI Question-What specific features, processes, or approaches could you emphasize or de-emphasize in your solution to better align with your desired goal?]:::AIGeneratedNode
+    zwZc29YHuAx-NJ7ukDjwh[AI Section Suggestion-Repurposing for New Use Cases]:::AIGeneratedNode
+    -YgA0IEcyFGJQHZbkE_8_[AI Question-How might different types of users or stakeholders leverage your solution in unexpected ways to address the problem in their unique contexts?]:::AIGeneratedNode
+    tAYdvmMKhilsChJKgveT4[AI Section Suggestion-Streamlining and Simplifying]:::AIGeneratedNode
+    6GeAy05KfgyFHy9S4789q[AI Question-What aspects of your current solution could you eliminate or remove to simplify the approach while still achieving your desired goal?]:::AIGeneratedNode
+    JGmr5jG2kcoli6wcxbIkN[AI Section Suggestion-Rearranging and Resequencing]:::AIGeneratedNode
+    aq9-i4aSi4UPnw2JiQSau[AI Question-How might you rearrange or reverse the order of steps in your solution to unlock new possibilities or improve the efficiency of your approach?]:::AIGeneratedNode
+    V4Kq8[Allow image input as prompt-undefined]:::UserNode
+    UaMhz[AI Stimulating Question-How could allowing image input as a prompt unlock new possibilities for your AI-powered brainstorming tool? What unique challenges or opportunities might this feature present for the overall user experience and business strategy?]:::AIGeneratedNode
+    1WuA1[AI Stimulating Question-What potential partnerships or integrations with image-based platforms or services could you explore to enhance the value and reach of your AI brainstorming tool? How might this feature differentiate your solution from competitors?]:::AIGeneratedNode
+    RgJVl[AI Stimulating Question-How could you leverage the image input feature to create more engaging and visually-driven marketing campaigns or content for your AI brainstorming tool? What types of user-generated content or visual prompts might resonate with your target audience?]:::AIGeneratedNode
+    11I8T[AI Stimulating Question-What creative ways could you promote the image input feature to attract new users and showcase the unique capabilities of your AI brainstorming tool? How might this feature be positioned to highlight the tool's ability to generate innovative ideas from diverse inputs?]:::AIGeneratedNode
+    root --&gt; EhPbetqybMoYyiB6PYq85
+    EhPbetqybMoYyiB6PYq85 --&gt; 2oCVoqfWP1_s-7rPraWyX
+    EhPbetqybMoYyiB6PYq85 --&gt; J-OWXm53dheLYiYPkYXHu
+    root --&gt; SiWG1r6e6LU4x-w64LeAq
+    SiWG1r6e6LU4x-w64LeAq --&gt; pBv1_8rD3zr3xspgStUct
+    root --&gt; nbaIMYIZbJg41jgEkl_nu
+    nbaIMYIZbJg41jgEkl_nu --&gt; y2KHXO6u0h3_Rd2oRym14
+    root --&gt; bGVN1rZdBhtp0GFfWCQh6
+    bGVN1rZdBhtp0GFfWCQh6 --&gt; th9L808pBd6aQH_eFwjXe
+    root --&gt; zwZc29YHuAx-NJ7ukDjwh
+    zwZc29YHuAx-NJ7ukDjwh --&gt; -YgA0IEcyFGJQHZbkE_8_
+    root --&gt; tAYdvmMKhilsChJKgveT4
+    tAYdvmMKhilsChJKgveT4 --&gt; 6GeAy05KfgyFHy9S4789q
+    root --&gt; JGmr5jG2kcoli6wcxbIkN
+    JGmr5jG2kcoli6wcxbIkN --&gt; aq9-i4aSi4UPnw2JiQSau
+    th9L808pBd6aQH_eFwjXe --&gt; V4Kq8
+    V4Kq8 --&gt; UaMhz
+    V4Kq8 --&gt; 1WuA1
+    V4Kq8 --&gt; RgJVl
+    V4Kq8 --&gt; 11I8T
+</graph><user_answer>Allow image input as prompt</user_answer><user_answer_node_id>V4Kq8</user_answer_node_id>

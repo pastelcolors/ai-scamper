@@ -91,7 +91,7 @@ export async function action({ request }: ActionFunctionArgs) {
 		const { projectId, graph, answer, answerNodeId, roles } =
 			aiAgentRequestsPayloadSchema.parse(body);
 
-		const msg = await anthropicClient.chat({
+		const prompt = {
 			messages: [
 				{
 					role: "system",
@@ -107,13 +107,32 @@ export async function action({ request }: ActionFunctionArgs) {
 					}),
 				},
 			],
-		});
+		}
+		const msg = await anthropicClient.chat(prompt);
+		console.log("###### BEGIN MAIN DOMAIN EXPERT OPINION PROMPT ######")
+		prompt.messages.forEach((message, index) => {
+			console.log(`Message ${index + 1}:`);
+			console.log(`Role: ${message.role}`);
+			console.log(`Content: ${message.content}`);
+			console.log('------------------');
+		  });
+		console.log("###### END MAIN DOMAIN EXPERT OPINION ######")
 
-		console.log(JSON.stringify(xmlToJson(msg.message.content), null, 2));
-
+		console.log("###### BEGIN DOMAIN EXPERT OPINION ######")
+		// console.log("--- BEGIN msg ---")
+		// console.log(msg)
+		// console.log("--- END msg ---")
+		// console.log("--- BEGIN JSON.stringify(xmlToJson(msg.message.content), null, 2) ---")
+		// console.log(JSON.stringify(xmlToJson(msg.message.content), null, 2));
+		// console.log("--- END JSON.stringify(xmlToJson(msg.message.content), null, 2) ---")
 		const llmResponse = DomainExpertResponseSchema.parse(
 			xmlToJson(msg.message.content),
 		);
+
+		// console.log("--- BEGIN llmResponse ---")
+		// console.log(llmResponse);
+		// console.log("--- END llmResponse ---")
+		console.log("###### END DOMAIN EXPERT OPINION ######")
 
 		return llmResponse.opinions;
 	} catch (error) {
